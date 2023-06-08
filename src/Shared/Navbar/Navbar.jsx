@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import logo from '../../../src/assets/logo.webp'
 import { Link } from 'react-router-dom';
 import { FaMoon } from "react-icons/fa";
+import { AuthContext } from '../../Provider/AuthProvider';
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
+    const handleLogout = () => {
+        logOut()
+            .then()
+            .error(error => console.log(error))
+    }
     return (
         <>
             <div className="navbar bg-base-100">
@@ -31,12 +39,27 @@ const Navbar = () => {
       <li><a><FaMoon></FaMoon></a></li>
     </ul>
   </div>
-  <div className="navbar-end">
+  {/* <div className="navbar-end">
   <div className="w-10 mr-4">
           <img className='rounded-full' src="https://i.ibb.co/8YbGPy6/IMG-20230520-192642.jpg" />
         </div>
     <Link to='login'><a className="btn">Login</a></Link>
-  </div>
+  </div> */}
+  <div className="navbar-end">
+                    {user && <p className='mr-8 '>
+                        <div className="tooltip tooltip-bottom" 
+                        data-tip={user.displayName ? 
+                        user.displayName : 'user name unavailable'}>
+                        <button className="btn"><img className='rounded-full h-2/4' src={user?.photoURL} alt="" /></button>
+                    </div></p>}
+                    {user ?
+                        <a onClick={handleLogout} className="btn bg-[#F9A51A] text-black">Logout</a> :
+                        <Link to="/login">
+                            <a className="btn bg-[#F9A51A] text-black">Login</a>
+                        </Link>
+                    }
+
+                </div>
 </div>
         </>
     );
