@@ -1,0 +1,24 @@
+[
+    {
+      "id": 1,
+      "name": "Football",
+      "image": "football.jpg",
+      "email": "football@example.com",
+      "numOfStudents": 25
+    },
+    {
+      "id": 2,
+      "name": "Basketball",
+      "image": "basketball.jpg",
+      "email": "basketball@example.com",
+      "numOfStudents": 50
+    },
+    {
+      "id": 3,
+      "name": "Tennis",
+      "image": "tennis.jpg",
+      "email": "tennis@example.com",
+      "numOfStudents": 10
+    }
+  ]
+  
