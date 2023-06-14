@@ -10,7 +10,7 @@ const MySlider = () => {
             <img src="https://i.ibb.co/bgzvnfD/banner1-1.jpg" className="w-full rounded-xl" />
             <div className="absolute rounded-xl flex h-full left-0 right-0 top-0 bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]">
                 <div className='ml-12 text-white space-y-7 w-2/5 my-auto'>
-                    <h1 className='text-6xl font-bold'>Affordable Price For Car Servicing</h1>
+                    <h1 className='text-6xl font-bold'>Give your child the best start in life with Sporty Scholars</h1>
                     <p>There are many variations of passages of  available, but the majority have suffered alteration in some form</p>
                     <div>
                         <button className="btn btn-primary mr-5">Discover More</button>
@@ -27,7 +27,7 @@ const MySlider = () => {
             <img src="https://i.ibb.co/fYCb0fQ/banner4.webp" className="w-full rounded-xl" />
             <div className="absolute rounded-xl flex h-full left-0 right-0 top-0 bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]">
                 <div className='ml-12 text-white space-y-7 w-2/5 my-auto'>
-                    <h1 className='text-6xl font-bold'>Affordable Price For Car Servicing</h1>
+                    <h1 className='text-6xl font-bold'>Give your child the best start in life with Sporty Scholars</h1>
                     <p>There are many variations of passages of  available, but the majority have suffered alteration in some form</p>
                     <div>
                         <button className="btn btn-primary mr-5">Discover More</button>
@@ -44,7 +44,7 @@ const MySlider = () => {
             <img src="https://i.ibb.co/F0W60B1/banner6.jpg" className="w-full rounded-xl" />
             <div className="absolute rounded-xl flex h-full left-0 right-0 top-0 bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]">
                 <div className='ml-12 text-white space-y-7 w-2/5 my-auto'>
-                    <h1 className='text-6xl font-bold'>Affordable Price For Car Servicing</h1>
+                    <h1 className='text-6xl font-bold'>Give your child the best start in life with Sporty Scholars</h1>
                     <p>There are many variations of passages of  available, but the majority have suffered alteration in some form</p>
                     <div>
                         <button className="btn btn-primary mr-5">Discover More</button>
@@ -61,7 +61,7 @@ const MySlider = () => {
             <img src="https://i.ibb.co/x89HW15/banner5.jpg" className="w-full rounded-xl" />
             <div className="absolute rounded-xl flex h-full left-0 right-0 top-0 bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]">
                 <div className='ml-12 text-white space-y-7 w-2/5 my-auto'>
-                    <h1 className='text-6xl font-bold'>Affordable Price For Car Servicing</h1>
+                    <h1 className='text-6xl font-bold'>Give your child the best start in life with Sporty Scholars</h1>
                     <p>There are many variations of passages of  available, but the majority have suffered alteration in some form</p>
                     <div>
                         <button className="btn btn-primary mr-5">Discover More</button>
