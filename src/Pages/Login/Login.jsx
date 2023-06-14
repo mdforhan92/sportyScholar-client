@@ -1,118 +1,120 @@
-import React, { useContext } from 'react';
-import { FaGithub, FaGoogle } from 'react-icons/fa';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../Provider/AuthProvider';
+import { useForm } from "react-hook-form";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import {  useState } from "react";
+import { ImEyeBlocked } from 'react-icons/im';
+import { AiOutlineEye } from "react-icons/ai";
 
-
+import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
+import SocialLogin from "../../components/Shared/SocialLogin/SocialLogin";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
-    const { signIn, signInWithGoogle, gitSignIn } = useContext(AuthContext);
+    const { signIn } = useAuth();
     const Navigate = useNavigate();
     const location = useLocation();
-    console.log('login page location', location)
-    const from = location.state?.from?.pathname || '/';
 
-    const handleLogin = event => {
-        event.preventDefault();
-        const form = event.target;
-        const email = form.email.value;
-        const password = form.password.value;
-        console.log(email, password);
+    const from = location.state?.from || "/";
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
 
-        signIn(email, password)
+    const [showPassword, setShowPassword] = useState(false);
+
+    const onSubmit = (data) => {
+        console.log(data);
+        signIn(data.email, data.password)
             .then(result => {
-                const loggedUser = result.user;
-                console.log(loggedUser);
-                Navigate(from, { replace: true })
+                const user = result.user;
+                console.log(user);
+                Swal.fire({
+                    title: 'User Login Successful.',
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                    }
+                });
+                Navigate(from, { replace: true });
             })
-            .catch(error => {
-                console.log(error);
-            })
+    };
 
-    }
-
-    // Google Login 
-    const handleGoogleSignIn =() =>{
-        signInWithGoogle()
-        .then(result =>{
-            const user =result.user
-            Navigate('/')
-        })
-        .catch(error =>{
-            console.log(error.message)
-        })
-    }
-    
-    //Github login
-    const handleGitHubSignIn = ()=>{
-        gitSignIn()
-        .then(result => {
-            const user = result.user;
-            Navigate('/')
-        })
-        .catch(error => {
-            console.log(error.message)
-        })
-    }
 
     return (
-        <div>
-            <div className="flex flex-col items-center justify-center min-h-screen">
-                <form onSubmit={handleLogin} className="w-full max-w-sm p-6 rounded-lg shadow-lg bg-white">
-                    <h1 className="text-2xl font-bold mb-4">Login</h1>
-                    <div className="mb-4">
-                        <label className="block text-gray-700 font-bold mb-2" for="email">
-                            Email
-                        </label>
-                        <input
-                            className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="email"
-                            type="email"
-                            name='email'
-                            required
-                            placeholder="Email"
-                        />
-                    </div>
-                    <div className="mb-6">
-                        <label className="block text-gray-700 font-bold mb-2" for="password">
-                            Password
-                        </label>
-                        <input
-                            className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="password"
-                            type="password"
-                            name='password'
-                            required
-                            placeholder="********"
-                        />
-                    </div>
-                    <div className="flex items-center justify-between">
-                        <button
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                            type="submit"
-                        >
-                            Login
-                        </button>
-                        <a
-                            className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-                            href="#"
-                        >
-                            Forgot Password?
-                        </a>
+        <div className="hero min-h-screen bg-base-300  ">
+            <Helmet>
+                <title>Login</title>
+            </Helmet>
+            <div className=" mt-12">
+                
+                <div className=" w-full shadow-2xl bg-base-100">
+                    <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Email</span>
+                            </label>
+                            <input
+                                type="email"
+                                {...register("email", { required: true })}
+                                placeholder="Email"
+                                className="input input-bordered"
+                            />
+                            {errors.email && (
+                                <span className="text-red-600">Email is required</span>
+                            )}
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Password</span>
+                            </label>
+                            <div className="relative">
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    {...register("password", { required: true })}
+                                    placeholder="Password"
+                                    className="input input-bordered w-full"
+                                />
 
-                    </div>
-                    <p className='mt-2 text-sm'>Don't Have an Account? <Link className='text-red-600 underline' to="/register">Register</Link></p>
+                                <div
+                                    className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                >
+                                    {showPassword ? (
+                                        <AiOutlineEye></AiOutlineEye>
+                                    ) : (
+                                        <ImEyeBlocked></ImEyeBlocked>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                        {errors.password && (
+                            <span className="text-red-600">Password is required</span>
+                        )}
+                        <div className="form-control">
+                            <label className="label">
+                                <a href="#" className="label-text-alt link link-hover">
+                                    Forgot password?
+                                </a>
+                            </label>
+                        </div>
+                        <div className="form-control mt-6">
+                            <input className="btn btn-primary" type="submit" value="Login" />
+                        </div>
+                        <SocialLogin></SocialLogin>
+                    </form>
+                            
+                    
+                    <p className="text-center pb-4">
+                        <small>
+                            Dont have an account? <Link to="/signup">Create an new one</Link>
+                        </small>
+                    </p>
 
-                </form>
-                <div className="border-t border-gray-300 my-8">or</div>
-
-                <div className='flex'>
-                    <button onClick={handleGoogleSignIn} className="btn btn-outline btn-success"><FaGoogle className='mr-2'></FaGoogle>  Google</button>
-                    <button onClick={handleGitHubSignIn} className="btn btn-outline ml-4"><FaGithub className='mr-2'></FaGithub> GitHub</button>
                 </div>
             </div>
-
-
         </div>
     );
 };
